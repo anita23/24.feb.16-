@@ -1,0 +1,21 @@
+##importar
+library (foreign)
+require(foreign)
+basecol<-read.dbf("C:\\Users\\SALA-C25\\Downloads\\COE1T215.dbf")
+
+
+###Entidades
+basecol$ENT1 <- as.numeric(as.character(basecol$ENT))
+Tabla1 <-subset (basecol,(ENT1==06))
+View(Tabla1)#### tabla de colima
+
+#attach(Tabla1)### para hacer esta base la principal
+Tabla1$P3L <- ordered(Tabla1$P3L,levels = c("01","02","03", "04","05","06","07","08","09","10","11","99"),labels = c("1 persona", "2 a 5 personas","6 a 10 personas", "11 a 15 personas", "16 a 20 personas", "21 a 30 personas", "31 a 50 personas", "51 a 100 personas", "101 a 250 personas", "251 a 500 personas", "501 a más personas", "no sabe"))
+table(Tabla1$P3L)
+
+Tabla1$P5 <- ordered(Tabla1$P5,levels = c("01","02","03", "09"),labels = c("SI", "NO TRABAJO LA SEMANA PASADA","NO SE ENCONTRO EN ESA SITUACIÓN", "NO SABE"))
+table(Tabla1$P5)
+
+Tabla1$P2E <- ordered(Tabla1$P2E,levels = c("1","2","3", "4","5","6","9"),labels = c("una persona temporalmente ausente de su actividad u oficio", "pensionado o jubilado de su empleo","estudiante", "una persona que se dedica a los quehaceres de su casa","una persona con alguna limitación física o mental que le impide trabajar por el resto de su vida","Otra condición", "no sabe"))
+table(Tabla1$P2E)
+table(Tabla1$P2E, Tabla1$P3L)
